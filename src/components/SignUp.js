@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Form } from "../common/Form";
 import { Title } from "../common/Title";
+import { postSignUp } from "../services/everest";
 
 export default function SignUp() {
   const [disabled, setDisabled] = useState(false);
@@ -11,6 +13,8 @@ export default function SignUp() {
     password: "",
     confirmPassword: "",
   });
+
+  const navigate = useNavigate();
 
   function handleForm({ value, name }) {
     setForm({
@@ -25,7 +29,19 @@ export default function SignUp() {
       return alert("The passwords do not match");
     }
     setDisabled(true);
-    console.log(form);
+    postSignUp({
+      name: form.name,
+      email: form.email,
+      password: form.password,
+    })
+      .then(() => navigate("/login"))
+      .catch((err) => {
+        console.log(err);
+        alert(
+          "There was an error when trying to sign up.\nCheck your inputs and try again."
+        );
+        setDisabled(false);
+      });
   }
 
   return (
