@@ -76,7 +76,7 @@ export default function SignUp() {
         />
         <input
           placeholder="Password"
-          name="Password"
+          name="password"
           type="password"
           disabled={disabled}
           onChange={(e) =>
