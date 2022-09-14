@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { ThreeDots } from "react-loader-spinner";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Form } from "../common/Form";
 import { Title } from "../common/Title";
@@ -100,12 +101,32 @@ export default function SignUp() {
           }
           required
         />
-        <button type="submit">Sign Up</button>
+        <button type="submit">
+          {disabled ? (
+            <ThreeDots
+              height="13"
+              width="51"
+              color="#FFFFFF"
+              ariaLabel="three-dots-loading"
+            />
+          ) : (
+            <p>Sign Up</p>
+          )}
+        </button>
       </Form>
+      <Link to="/login">
+        <Span>Already a member? Log in!</Span>
+      </Link>
     </main>
   );
 }
 
 const TitleWrapper = styled(Title)`
   margin-top: 15vh;
+`;
+
+const Span = styled.span`
+  font-size: 15px;
+  font-weight: 700;
+  color: #22223b;
 `;
