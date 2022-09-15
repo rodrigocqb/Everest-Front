@@ -24,7 +24,7 @@ export default function Header() {
       <UserDiv>
         <div>
           <IoPersonCircle />
-          <p>{`Hello, ${user}!`}</p>
+          <p>{`Hello, ${user.name}!`}</p>
         </div>
         <IoCart />
         <IoExit />

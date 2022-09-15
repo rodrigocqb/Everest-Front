@@ -1,7 +1,9 @@
 import styled from "styled-components";
+import { useLocal } from "../hooks/useLocal";
 import Header from "./Header";
 
 export default function Home() {
+  useLocal();
   return (
     <>
       <Header />
