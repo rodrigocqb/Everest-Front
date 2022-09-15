@@ -28,6 +28,13 @@ export default function Header() {
             {user ? `Hello, ${user.name}!` : <Link to="/login">Login</Link>}
           </p>
         </div>
+        {user ? (
+          <></>
+        ) : (
+          <div>
+            <Link to="/sign-up">Sign Up</Link>
+          </div>
+        )}
         <IoCart />
         {user ? (
           <IoExit
