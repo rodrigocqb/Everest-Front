@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { ThreeDots } from "react-loader-spinner";
 import { Link, useNavigate } from "react-router-dom";
 import { Form } from "../common/Form";
+import UserContext from "../contexts/UserContext";
+import { postLogin } from "../services/everest";
 import { Span, TitleWrapper } from "./SignUp";
 
 export default function Login() {
@@ -10,6 +12,8 @@ export default function Login() {
     email: "",
     password: "",
   });
+
+  const { setUser } = useContext(UserContext);
 
   const navigate = useNavigate();
 
@@ -23,7 +27,19 @@ export default function Login() {
   function handleSubmit(e) {
     e.preventDefault();
     setDisabled(true);
-    console.log(form);
+    postLogin(form)
+      .then((res) => {
+        setUser(res.data);
+        localStorage.setItem("user", JSON.stringify(res.data));
+        navigate("/");
+      })
+      .catch((err) => {
+        console.log(err);
+        alert(
+          "There was an error when trying to login.\nCheck your inputs and try again"
+        );
+        setDisabled(false);
+      });
   }
 
   return (

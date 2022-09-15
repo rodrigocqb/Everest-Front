@@ -8,4 +8,12 @@ function postSignUp(body) {
   return promise;
 }
 
-export { postSignUp };
+function postLogin(body) {
+  const promise = axios.post(
+    `${process.env.REACT_APP_API_BASE_URL}/login`,
+    body
+  );
+  return promise;
+}
+
+export { postSignUp, postLogin };
