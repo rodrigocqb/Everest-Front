@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Title } from "../common/Title";
 import { IoSearch, IoPersonCircle, IoCart, IoExit } from "react-icons/io5";
@@ -7,6 +7,8 @@ import UserContext from "../contexts/UserContext";
 
 export default function Header() {
   const { user } = useContext(UserContext);
+
+  const navigate = useNavigate();
 
   return (
     <HeaderWrapper>
@@ -27,7 +29,14 @@ export default function Header() {
           <p>{`Hello, ${user.name}!`}</p>
         </div>
         <IoCart />
-        <IoExit />
+        <IoExit
+          onClick={() => {
+            if (window.confirm("Are you sure you want to log out?")) {
+              localStorage.removeItem("user");
+              navigate("/");
+            }
+          }}
+        />
       </UserDiv>
     </HeaderWrapper>
   );
@@ -74,6 +83,7 @@ const Searchbar = styled.div`
     position: absolute;
     right: 10px;
     top: 14px;
+    cursor: pointer;
   }
 `;
 
@@ -92,5 +102,6 @@ const UserDiv = styled.div`
   svg {
     font-size: 30px;
     fill: #4a4e69;
+    cursor: pointer;
   }
 `;
