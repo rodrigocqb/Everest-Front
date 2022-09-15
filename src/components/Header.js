@@ -29,14 +29,18 @@ export default function Header() {
           </p>
         </div>
         <IoCart />
-        <IoExit
-          onClick={() => {
-            if (window.confirm("Are you sure you want to log out?")) {
-              localStorage.removeItem("user");
-              window.location.reload();
-            }
-          }}
-        />
+        {user ? (
+          <IoExit
+            onClick={() => {
+              if (window.confirm("Are you sure you want to log out?")) {
+                localStorage.removeItem("user");
+                window.location.reload();
+              }
+            }}
+          />
+        ) : (
+          <></>
+        )}
       </UserDiv>
     </HeaderWrapper>
   );
