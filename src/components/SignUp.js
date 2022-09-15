@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Form } from "../common/Form";
 import { Title } from "../common/Title";
+import { useLocal } from "../hooks/useLocal";
 import { postSignUp } from "../services/everest";
 
 export default function SignUp() {
@@ -14,6 +15,8 @@ export default function SignUp() {
     password: "",
     confirmPassword: "",
   });
+
+  useLocal();
 
   const navigate = useNavigate();
 

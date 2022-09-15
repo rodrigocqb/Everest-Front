@@ -3,6 +3,7 @@ import { ThreeDots } from "react-loader-spinner";
 import { Link, useNavigate } from "react-router-dom";
 import { Form } from "../common/Form";
 import UserContext from "../contexts/UserContext";
+import { useLocal } from "../hooks/useLocal";
 import { postLogin } from "../services/everest";
 import { Span, TitleWrapper } from "./SignUp";
 
@@ -12,6 +13,8 @@ export default function Login() {
     email: "",
     password: "",
   });
+
+  useLocal();
 
   const { setUser } = useContext(UserContext);
 
