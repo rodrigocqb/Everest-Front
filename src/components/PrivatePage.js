@@ -11,7 +11,6 @@ export default function PrivatePage({ children }) {
 
   useEffect(() => {
     if (!localUser) {
-      alert("Please log in before accessing this page");
       navigate("/login");
     } else if (!user) {
       setUser(localUser);
