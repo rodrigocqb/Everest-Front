@@ -28,7 +28,7 @@ export default function ProductCards() {
             image={product.image}
             productName={product.name}
             shipping={product.shipping}
-            price={product.price}
+            price={Number(product.price).toFixed(2)}
             units={product.units}
             productId={product._id}
             navigate={navigate}
@@ -47,7 +47,7 @@ function Card({ setShowModal, image, productName, shipping, price, units, produc
       <img src={image} alt="" />
       <Filter units={units}/>
       <h1>{productName}</h1>
-      {(units === 0)? <h4>Sold off</h4> : (shipping === 0)? <h2>Free Shipping</h2> : <h2>${shipping} <br/>Express</h2> }
+      {(units === 0)? <h4>Sold off</h4> : (shipping === 0)? <h2>Free Shipping</h2> : (<h2>${Number(shipping).toFixed(2)} Shipping Fees</h2>)}
       <h3>${price}</h3>
       <Button
         onClick={(e) => {
