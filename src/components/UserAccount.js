@@ -14,26 +14,28 @@ export default function UserAccount() {
       <Header />
       <Main>
         <Wrapper>
-          <TitleContainer>Your account</TitleContainer>
-          <InfoWrapper>
-            <h1>About you</h1>
-            <p>{user.name}</p>
-            <p>{`Member since ${user.date}`}</p>
-          </InfoWrapper>
-          <Options>
-            <Link to="/orders">
-              <div>
-                <BiNotepad />
-                <p>Your orders</p>
-              </div>
-            </Link>
-            <Link to="/wishlist">
-              <div>
-                <BiHeart />
-                <p>Your wishlist</p>
-              </div>
-            </Link>
-          </Options>
+          <div>
+            <TitleContainer>Your account</TitleContainer>
+            <InfoWrapper>
+              <h1>About you</h1>
+              <p>{user.name}</p>
+              <p>{`Member since ${user.date}`}</p>
+            </InfoWrapper>
+            <Options>
+              <Link to="/orders">
+                <div>
+                  <BiNotepad />
+                  <p>Your orders</p>
+                </div>
+              </Link>
+              <Link to="/wishlist">
+                <div>
+                  <BiHeart />
+                  <p>Your wishlist</p>
+                </div>
+              </Link>
+            </Options>
+          </div>
         </Wrapper>
       </Main>
     </>
@@ -41,13 +43,16 @@ export default function UserAccount() {
 }
 
 const Wrapper = styled.section`
-  width: 300px;
-  margin-top: 80px;
+  width: 320px;
+  margin-top: 180px;
   background-color: #f2e9e4;
   filter: drop-shadow(0px 4px 4px #c9ada7);
   color: #22223b;
   border-radius: 20px;
-  padding: 15px;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   a {
     color: #22223b;
   }
