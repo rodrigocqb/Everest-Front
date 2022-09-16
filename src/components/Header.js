@@ -54,6 +54,7 @@ export default function Header() {
 }
 
 const HeaderWrapper = styled.header`
+  z-index: 1;
   height: 120px;
   width: 100vw;
   background-color: #f2e9e4;
