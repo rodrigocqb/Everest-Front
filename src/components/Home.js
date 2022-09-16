@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import { Main } from "../common/Main";
 import { useLocal } from "../hooks/useLocal";
 import Header from "./Header";
 import ProductCards from "./ProductCards";
@@ -9,14 +9,8 @@ export default function Home() {
     <>
       <Header />
       <Main>
-        <ProductCards/>
+        <ProductCards />
       </Main>
     </>
   );
 }
-
-const Main = styled.main`
-  background-color: #22223b;
-  margin-top: 120px;
-  min-height: calc(100vh - 120px);
-`;

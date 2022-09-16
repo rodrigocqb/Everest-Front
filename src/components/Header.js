@@ -25,7 +25,11 @@ export default function Header() {
         <div>
           <IoPersonCircle />
           <p>
-            {user ? `Hello, ${user.name}!` : <Link to="/login">Login</Link>}
+            {user ? (
+              <Link to="/account">{`Hello, ${user.name}!`}</Link>
+            ) : (
+              <Link to="/login">Login</Link>
+            )}
           </p>
         </div>
         {user ? (
