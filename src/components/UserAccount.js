@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { Main } from "../common/Main";
 import UserContext from "../contexts/UserContext";
 import Header from "./Header";
+import { BiHeart, BiNotepad } from "react-icons/bi";
 
 export default function UserAccount() {
   const { user } = useContext(UserContext);
@@ -21,10 +22,16 @@ export default function UserAccount() {
           </InfoWrapper>
           <Options>
             <Link to="/orders">
-              <div>Your orders</div>
+              <div>
+                <BiNotepad />
+                <p>Your orders</p>
+              </div>
             </Link>
             <Link to="/wishlist">
-              <div>Your wishlist</div>
+              <div>
+                <BiHeart />
+                <p>Your wishlist</p>
+              </div>
             </Link>
           </Options>
         </Wrapper>
@@ -66,5 +73,9 @@ const Options = styled.div`
   div {
     margin-top: 20px;
     font-size: 30px;
+    display: flex;
+  }
+  svg {
+    margin-right: 10px;
   }
 `;
