@@ -15,5 +15,11 @@ function postLogin(body) {
   );
   return promise;
 }
+function getProducts() {
+  const promise = axios.get(
+    `${process.env.REACT_APP_API_BASE_URL}/products`
+  );
+  return promise;
+}
 
-export { postSignUp, postLogin };
+export { postSignUp, postLogin, getProducts };
