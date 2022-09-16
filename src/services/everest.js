@@ -21,5 +21,22 @@ function getProducts() {
   );
   return promise;
 }
+function getAuth(){
+  if(!localStorage.getItem("user")) {
+    return false
+  }
+  const token = JSON.parse(localStorage.getItem("user")).token
+  console.log(token)
+  const authorization = {headers: {authorization: `Bearer ${token}`}}
+  return authorization
+}
 
-export { postSignUp, postLogin, getProducts };
+function addToCart(productId) {
+  const authorization = getAuth();
+  const promise = axios.post(
+    `${process.env.REACT_APP_API_BASE_URL}/cart`, productId ,authorization
+  );
+  return promise;
+}
+
+export { postSignUp, postLogin, getProducts, addToCart };
