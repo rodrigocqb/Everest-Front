@@ -26,7 +26,6 @@ function getAuth() {
     return false;
   }
   const token = JSON.parse(localStorage.getItem("user")).token;
-  console.log(token);
   const authorization = { headers: { Authorization: `Bearer ${token}` } };
   return authorization;
 }
@@ -58,6 +57,16 @@ function removeItemFromCart(productId) {
   );
   return promise;
 }
+function addToWishlist(productId){
+  const authorization = getAuth();
+  console.log(productId)
+  const promise = axios.post(
+    `${process.env.REACT_APP_API_BASE_URL}/wishlist/${productId}`,
+    {},
+    authorization
+  );
+  return promise;
+}
 
 export {
   postSignUp,
@@ -66,4 +75,5 @@ export {
   addToCart,
   getCart,
   removeItemFromCart,
+  addToWishlist
 };
