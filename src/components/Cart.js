@@ -20,6 +20,15 @@ export default function Cart() {
       });
   }, [refresh]);
 
+  let shipping = 0;
+  let subtotal = 0;
+  cart.forEach((value) => {
+    shipping += value.shipping;
+  });
+  cart.forEach((value) => {
+    subtotal += value.price * value.quantity;
+  });
+
   return (
     <>
       <Header />
@@ -83,7 +92,16 @@ export default function Cart() {
               ))
             )}
           </ItemsWrapper>
-          {cart.length !== 0 && <BuyButton>Buy</BuyButton>}
+          {cart.length !== 0 && (
+            <>
+              <Price>
+                <p>{`Subtotal: $${subtotal.toFixed(2)}`}</p>
+                <p>{`Shipping fees: $${shipping.toFixed(2)}`}</p>
+                <p>{`Total: $${(shipping + subtotal).toFixed(2)}`}</p>
+              </Price>
+              <BuyButton>Buy</BuyButton>
+            </>
+          )}
         </CartSection>
       </CreamMain>
     </>
@@ -126,7 +144,7 @@ const CreamMain = styled(Main)`
 `;
 
 const ItemsWrapper = styled.div`
-  margin-top: 40px;
+  margin: 40px 0;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -181,7 +199,7 @@ const ButtonsWrapper = styled.div`
 `;
 
 const BuyButton = styled.button`
-  margin-top: 50px;
+  margin-top: 25px;
   width: 100px;
   min-height: 50px;
   border-radius: 5px;
@@ -193,4 +211,10 @@ const BuyButton = styled.button`
   font-size: 22px;
   color: #22223b;
   font-weight: 500;
+`;
+
+const Price = styled.div`
+  display: flex;
+  flex-direction: column;
+  row-gap: 6px;
 `;
