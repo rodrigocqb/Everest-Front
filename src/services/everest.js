@@ -50,4 +50,20 @@ function getCart() {
   return promise;
 }
 
-export { postSignUp, postLogin, getProducts, addToCart, getCart };
+function removeItemFromCart(productId) {
+  const authorization = getAuth();
+  const promise = axios.delete(
+    `${process.env.REACT_APP_API_BASE_URL}/cart/${productId}`,
+    authorization
+  );
+  return promise;
+}
+
+export {
+  postSignUp,
+  postLogin,
+  getProducts,
+  addToCart,
+  getCart,
+  removeItemFromCart,
+};

@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Main } from "../common/Main";
-import { getCart } from "../services/everest";
+import { addToCart, getCart, removeItemFromCart } from "../services/everest";
 import Header from "./Header";
 
 export default function Cart() {
   const [cart, setCart] = useState([]);
+  const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
     getCart()
@@ -23,7 +24,9 @@ export default function Cart() {
       <Header />
       <CreamMain>
         <CartSection>
-          <h1>Your cart</h1>
+          <div>
+            <h1>Your cart</h1>
+          </div>
           <ItemsWrapper>
             {cart.length === 0
               ? "Your cart is empty"
@@ -32,16 +35,56 @@ export default function Cart() {
                     <img src={value.image} alt="" />
                     <InfoWrapper>
                       <p>{value.name}</p>
-                      <p>{`$${value.price}`}</p>
+                      <p>{`$${value.price.toFixed(2)}`}</p>
                     </InfoWrapper>
                     <ButtonsWrapper>
-                      <div>+</div>
+                      <div
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          if (value.units > 0) {
+                            addToCart(value.productId)
+                              .then(() => {
+                                console.log("added");
+                                if (refresh === true) {
+                                  setRefresh(false);
+                                } else {
+                                  setRefresh(true);
+                                }
+                              })
+                              .catch((err) =>
+                                alert("There are no more units left")
+                              );
+                          }
+                        }}
+                      >
+                        +
+                      </div>
                       <p>{`Qty: ${value.quantity}`}</p>
-                      <div>-</div>
+                      <div
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          removeItemFromCart(value.productId)
+                            .then(() => {
+                              console.log("removed");
+                              if (refresh === true) {
+                                setRefresh(false);
+                              } else {
+                                setRefresh(true);
+                              }
+                            })
+                            .catch((err) => {
+                              alert("An error has occurred");
+                              console.log(err);
+                            });
+                        }}
+                      >
+                        -
+                      </div>
                     </ButtonsWrapper>
                   </div>
                 ))}
           </ItemsWrapper>
+          <BuyButton>Buy</BuyButton>
         </CartSection>
       </CreamMain>
     </>
@@ -58,6 +101,9 @@ const CartSection = styled.section`
   padding: 60px;
   color: #ffffff;
   overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   ::-webkit-scrollbar {
     display: block;
   }
@@ -65,6 +111,10 @@ const CartSection = styled.section`
   h1 {
     font-size: 36px;
     font-weight: 700;
+  }
+
+  > div {
+    width: 100%;
   }
 `;
 
@@ -125,4 +175,19 @@ const ButtonsWrapper = styled.div`
   p {
     font-size: 14px;
   }
+`;
+
+const BuyButton = styled.button`
+  margin-top: 50px;
+  width: 100px;
+  height: 50px;
+  border-radius: 5px;
+  background-color: #f2e9e4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 0px;
+  font-size: 22px;
+  color: #22223b;
+  font-weight: 500;
 `;
