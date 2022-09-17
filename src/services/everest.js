@@ -59,6 +59,16 @@ function removeItemFromCart(productId) {
   return promise;
 }
 
+function completeOrder(body) {
+  const authorization = getAuth();
+  const promise = axios.post(
+    `${process.env.REACT_APP_API_BASE_URL}/order`,
+    body,
+    authorization
+  );
+  return promise;
+}
+
 export {
   postSignUp,
   postLogin,
@@ -66,4 +76,5 @@ export {
   addToCart,
   getCart,
   removeItemFromCart,
+  completeOrder,
 };
