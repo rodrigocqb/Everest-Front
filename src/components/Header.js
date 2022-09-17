@@ -39,7 +39,9 @@ export default function Header() {
             <Link to="/sign-up">Sign Up</Link>
           </div>
         )}
-        <IoCart />
+        <Link to="/cart">
+          <IoCart />
+        </Link>
         {user ? (
           <IoExit
             onClick={() => {

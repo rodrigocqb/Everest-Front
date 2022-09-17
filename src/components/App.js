@@ -2,6 +2,8 @@ import { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import UserContext from "../contexts/UserContext";
 import GlobalStyle from "../styles/GlobalStyle";
+import Cart from "./Cart";
+import FinishOrder from "./FinishOrder";
 import Home from "./Home";
 import Login from "./Login";
 import PrivatePage from "./PrivatePage";
@@ -24,6 +26,22 @@ function App() {
             element={
               <PrivatePage>
                 <UserAccount />
+              </PrivatePage>
+            }
+          />
+          <Route
+            path="/cart"
+            element={
+              <PrivatePage>
+                <Cart />
+              </PrivatePage>
+            }
+          />
+          <Route
+            path="/order"
+            element={
+              <PrivatePage>
+                <FinishOrder />
               </PrivatePage>
             }
           />

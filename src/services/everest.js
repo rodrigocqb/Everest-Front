@@ -15,17 +15,19 @@ function postLogin(body) {
   );
   return promise;
 }
+
 function getProducts() {
   const promise = axios.get(`${process.env.REACT_APP_API_BASE_URL}/products`);
   return promise;
 }
+
 function getAuth() {
   if (!localStorage.getItem("user")) {
     return false;
   }
   const token = JSON.parse(localStorage.getItem("user")).token;
   console.log(token);
-  const authorization = { headers: { authorization: `Bearer ${token}` } };
+  const authorization = { headers: { Authorization: `Bearer ${token}` } };
   return authorization;
 }
 
@@ -39,4 +41,13 @@ function addToCart(productId) {
   return promise;
 }
 
-export { postSignUp, postLogin, getProducts, addToCart };
+function getCart() {
+  const authorization = getAuth();
+  const promise = axios.get(
+    `${process.env.REACT_APP_API_BASE_URL}/cart`,
+    authorization
+  );
+  return promise;
+}
+
+export { postSignUp, postLogin, getProducts, addToCart, getCart };

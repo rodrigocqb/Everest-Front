@@ -8,7 +8,7 @@ export default function ProductCards() {
   const [products, setProducts] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
-  
+
   useEffect(() => {
     const promise = getProducts();
     promise
@@ -20,10 +20,19 @@ export default function ProductCards() {
 
   return (
     <>
-      {showModal ? <ProductModal setShowModal={setShowModal} showModal={showModal} products={products} /> : <></>}
+      {showModal ? (
+        <ProductModal
+          setShowModal={setShowModal}
+          showModal={showModal}
+          products={products}
+        />
+      ) : (
+        <></>
+      )}
       <CardsWrappler>
         {products.map((product) => (
           <Card
+            key={product._id}
             setShowModal={setShowModal}
             image={product.image}
             productName={product.name}
@@ -38,25 +47,43 @@ export default function ProductCards() {
     </>
   );
 }
-function Card({ setShowModal, image, productName, shipping, price, units, productId, navigate }) {
-  
+function Card({
+  setShowModal,
+  image,
+  productName,
+  shipping,
+  price,
+  units,
+  productId,
+  navigate,
+}) {
   return (
-    <CardWrappler onClick={() => {
-      setShowModal(productId);
-    }} units={units} shipping={shipping}>
+    <CardWrappler
+      onClick={() => {
+        setShowModal(productId);
+      }}
+      units={units}
+      shipping={shipping}
+    >
       <img src={image} alt="" />
-      <Filter units={units}/>
+      <Filter units={units} />
       <h1>{productName}</h1>
-      {(units === 0)? <h4>Sold off</h4> : (shipping === 0)? <h2>Free Shipping</h2> : (<h2>${Number(shipping).toFixed(2)} Shipping Fees</h2>)}
+      {units === 0 ? (
+        <h4>Sold off</h4>
+      ) : shipping === 0 ? (
+        <h2>Free Shipping</h2>
+      ) : (
+        <h2>${Number(shipping).toFixed(2)} Shipping Fees</h2>
+      )}
       <h3>${price}</h3>
       <Button
         onClick={(e) => {
           e.stopPropagation();
-          if(units > 0) {
-            const promise = addToCart({productId});
+          if (units > 0) {
+            const promise = addToCart(productId);
             promise
-            .then(()=> console.log('added'))
-            .catch(()=> navigate('/login'))
+              .then(() => console.log("added"))
+              .catch(() => navigate("/login"));
           }
         }}
       >
@@ -80,7 +107,7 @@ const CardWrappler = styled.div`
   padding: 8px;
   width: 290px;
   height: 420px;
-  background-color:${ props=> props.units === 0? '#b0afb0' : '#f2e9e7'};
+  background-color: ${(props) => (props.units === 0 ? "#b0afb0" : "#f2e9e7")};
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -102,7 +129,7 @@ const CardWrappler = styled.div`
     //shipping:
     font-weight: 700;
     font-style: bold;
-    color: ${props=> (props.shipping === 0)? '#04d483': '#1d1f1f'};
+    color: ${(props) => (props.shipping === 0 ? "#04d483" : "#1d1f1f")};
     font-size: 18px;
   }
   h3 {
@@ -120,12 +147,12 @@ const CardWrappler = styled.div`
   }
 `;
 const Filter = styled.div`
-width:273px;
-height: 273px;
-background-color: grey;
-position: absolute;
-opacity: ${props=> (props.units === 0)? '60%':'0'}
-`
+  width: 273px;
+  height: 273px;
+  background-color: grey;
+  position: absolute;
+  opacity: ${(props) => (props.units === 0 ? "60%" : "0")};
+`;
 const Button = styled.div`
   position: absolute;
   margin-right: 20px;
