@@ -18,7 +18,7 @@ export default function Cart() {
         alert("There was an error when trying to load your cart");
         console.error(err);
       });
-  }, []);
+  }, [refresh]);
   return (
     <>
       <Header />
@@ -66,11 +66,7 @@ export default function Cart() {
                           removeItemFromCart(value.productId)
                             .then(() => {
                               console.log("removed");
-                              if (refresh === true) {
-                                setRefresh(false);
-                              } else {
-                                setRefresh(true);
-                              }
+                              setRefresh(!refresh);
                             })
                             .catch((err) => {
                               alert("An error has occurred");
