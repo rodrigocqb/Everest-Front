@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { IoCart } from "react-icons/io5";
 import ProductModal from "./ProductModal";
 import { useNavigate } from "react-router-dom";
+
+
 export default function ProductCards() {
   const [products, setProducts] = useState([]);
   const [showModal, setShowModal] = useState(false);
@@ -70,7 +72,7 @@ function Card({
       <h1>{productName}</h1>
       {units === 0 ? (
         <h4>Sold off</h4>
-      ) : shipping === 0 ? (
+      ) : Number(shipping) === 0 ? (
         <h2>Free Shipping</h2>
       ) : (
         <h2>${Number(shipping).toFixed(2)} Shipping Fees</h2>
@@ -80,8 +82,7 @@ function Card({
         onClick={(e) => {
           e.stopPropagation();
           if (units > 0) {
-            const promise = addToCart(productId);
-            promise
+            addToCart(productId)
               .then(() => console.log("added"))
               .catch(() => navigate("/login"));
           }
@@ -129,7 +130,7 @@ const CardWrappler = styled.div`
     //shipping:
     font-weight: 700;
     font-style: bold;
-    color: ${(props) => (props.shipping === 0 ? "#04d483" : "#1d1f1f")};
+    color: ${(props) => (Number(props.shipping) === 0 ? "#04d483" : "#1d1f1f")};
     font-size: 18px;
   }
   h3 {

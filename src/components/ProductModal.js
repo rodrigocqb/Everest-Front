@@ -1,15 +1,14 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import styled from "styled-components";
-import { ThreeDots } from "react-loader-spinner";
 import { IoClose } from "react-icons/io5";
+import Button from "../common/Button";
+
 
 export default function ProductModal({ setShowModal, products, showModal }) {
   const [productClicked, setProductClicked] = useState({})
-  const [disabled, setDisabled] = useState(false);
 
   useEffect(() => {
-    // eslint-disable-next-line
     const choosed = products.filter((product) => product._id === showModal);
     const price = Number(choosed[0].price);
     const shipping = Number(choosed[0].shipping);
@@ -18,12 +17,11 @@ export default function ProductModal({ setShowModal, products, showModal }) {
     setProductClicked(choosed[0])
   }, [showModal])
 
-  console.log(productClicked.image)
   return (
     <ModalWrappler onClick={() => setShowModal(false)}>
       <Modal>
         <CloseButton onClick={() => setShowModal(false)}>
-        <IoClose size={25}/>
+          <IoClose size={25} />
         </CloseButton>
         <img src={productClicked.image} alt="" />
         <DetailsWrappler>
@@ -33,76 +31,25 @@ export default function ProductModal({ setShowModal, products, showModal }) {
             <h2>${productClicked.price}</h2>
             <h2>{(productClicked.shipping === '0.00') ? 'Free Shipping' : `$${productClicked.shipping} shipping and import fees`} </h2>
             <h2>{productClicked.units} units left</h2>
-            <h2>{(productClicked.sizes)? productClicked.sizes.map(size => `[${size}]`):''} sizes</h2>
+            <h2>{(productClicked.sizes) ? productClicked.sizes.map(size => `[${size}]`) : ''} sizes</h2>
             <h3>ABOUT THIS ITEM</h3>
             <h2>{productClicked.description}</h2>
-            <h2>{(productClicked.categories)? productClicked.categories.map(categorie => `[${categorie}]`):''}</h2>          
-            </Details>
-            <Buttons>
-            
-            <button onClick={()=> console.log('buy')}>
-          {disabled ? (
-            <ThreeDots
-              height="13"
-              width="51"
-              color="#FFFFFF"
-              ariaLabel="three-dots-loading"
-            />
-          ) : (
-            <p>Buy</p>
-          )}
-        </button>
-        <button onClick={()=> console.log('Cart')}>
-          {disabled ? (
-            <ThreeDots
-              height="13"
-              width="51"
-              color="#FFFFFF"
-              ariaLabel="three-dots-loading"
-            />
-          ) : (
-            <p>Add to Cart</p>
-          )}
-        </button>
-        <button onClick={()=> console.log('Wishlist')} >
-          {disabled ? (
-            <ThreeDots
-              height="13"
-              width="51"
-              color="#FFFFFF"
-              ariaLabel="three-dots-loading"
-            />
-          ) : (
-            <p>Wishlist</p>
-          )}
-        </button >
-            </Buttons>
+            <h2>{(productClicked.categories) ? productClicked.categories.map(categorie => `[${categorie}]`) : ''}</h2>
+          </Details>
+          <ButtonsWrappler>
+            <Button productClicked={productClicked} type='buy' />
+            <Button productClicked={productClicked} type='cart' />
+            <Button productClicked={productClicked} type='wishlist' />
+          </ButtonsWrappler>
         </DetailsWrappler>
       </Modal>
     </ModalWrappler>
   );
 }
-const Buttons = styled.div`
-display: flex;
-margin-top: 80px;
+const ButtonsWrappler = styled.div`
 width: 100%;
-justify-content: space-around;
-button {
-    width: 100px;
-    max-width: 400px;
-    height: 46px;
-    background-color: #22223b;
-    border-radius: 5px;
-    color: #ffffff;
-    font-size: 20px;
-    font-weight: 700;
-    border: 0px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: ${(props) => (props.disabled ? 0.7 : 1)};
-    cursor: pointer;
-  }
+display: flex;
+justify-content: space-between;
 `
 const DetailsWrappler = styled.div`
 display: flex;
@@ -160,4 +107,4 @@ margin-top: 30px;
 margin-right: 30px;
 cursor: pointer;
 `
-;
+  ;
