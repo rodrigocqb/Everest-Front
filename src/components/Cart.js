@@ -19,6 +19,7 @@ export default function Cart() {
         console.error(err);
       });
   }, [refresh]);
+
   return (
     <>
       <Header />
@@ -28,59 +29,61 @@ export default function Cart() {
             <h1>Your cart</h1>
           </div>
           <ItemsWrapper>
-            {cart.length === 0
-              ? "Your cart is empty"
-              : cart.map((value) => (
-                  <div key={value.productId}>
-                    <img src={value.image} alt="" />
-                    <InfoWrapper>
-                      <p>{value.name}</p>
-                      <p>{`$${value.price.toFixed(2)}`}</p>
-                    </InfoWrapper>
-                    <ButtonsWrapper>
-                      <div
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          if (value.units > 0) {
-                            addToCart(value.productId)
-                              .then(() => {
-                                console.log("added");
-                                if (refresh === true) {
-                                  setRefresh(false);
-                                } else {
-                                  setRefresh(true);
-                                }
-                              })
-                              .catch((err) =>
-                                alert("There are no more units left")
-                              );
-                          }
-                        }}
-                      >
-                        +
-                      </div>
-                      <p>{`Qty: ${value.quantity}`}</p>
-                      <div
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          removeItemFromCart(value.productId)
+            {cart.length === 0 ? (
+              <h2>Your cart is empty</h2>
+            ) : (
+              cart.map((value) => (
+                <div key={value.productId}>
+                  <img src={value.image} alt="" />
+                  <InfoWrapper>
+                    <p>{value.name}</p>
+                    <p>{`$${value.price.toFixed(2)}`}</p>
+                  </InfoWrapper>
+                  <ButtonsWrapper>
+                    <div
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        if (value.units > 0) {
+                          addToCart(value.productId)
                             .then(() => {
-                              console.log("removed");
-                              setRefresh(!refresh);
+                              console.log("added");
+                              if (refresh === true) {
+                                setRefresh(false);
+                              } else {
+                                setRefresh(true);
+                              }
                             })
-                            .catch((err) => {
-                              alert("An error has occurred");
-                              console.log(err);
-                            });
-                        }}
-                      >
-                        -
-                      </div>
-                    </ButtonsWrapper>
-                  </div>
-                ))}
+                            .catch((err) =>
+                              alert("There are no more units left")
+                            );
+                        }
+                      }}
+                    >
+                      +
+                    </div>
+                    <p>{`Qty: ${value.quantity}`}</p>
+                    <div
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        removeItemFromCart(value.productId)
+                          .then(() => {
+                            console.log("removed");
+                            setRefresh(!refresh);
+                          })
+                          .catch((err) => {
+                            alert("An error has occurred");
+                            console.log(err);
+                          });
+                      }}
+                    >
+                      -
+                    </div>
+                  </ButtonsWrapper>
+                </div>
+              ))
+            )}
           </ItemsWrapper>
-          <BuyButton>Buy</BuyButton>
+          {cart.length !== 0 && <BuyButton>Buy</BuyButton>}
         </CartSection>
       </CreamMain>
     </>
@@ -96,17 +99,21 @@ const CartSection = styled.section`
   border-radius: 20px;
   padding: 60px;
   color: #ffffff;
-  overflow-y: scroll;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  ::-webkit-scrollbar {
-    display: block;
-  }
+  border: 1px solid #9a8c98;
+  filter: drop-shadow(0px 6px 4px #c9ada7);
 
   h1 {
     font-size: 36px;
     font-weight: 700;
+  }
+
+  h2 {
+    font-size: 28px;
+    font-weight: 500;
   }
 
   > div {
@@ -176,7 +183,7 @@ const ButtonsWrapper = styled.div`
 const BuyButton = styled.button`
   margin-top: 50px;
   width: 100px;
-  height: 50px;
+  min-height: 50px;
   border-radius: 5px;
   background-color: #f2e9e4;
   display: flex;
