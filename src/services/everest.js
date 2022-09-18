@@ -60,7 +60,6 @@ function removeItemFromCart(productId) {
 
 function addToWishlist(productId) {
   const authorization = getAuth();
-  console.log(productId);
   const promise = axios.post(
     `${process.env.REACT_APP_API_BASE_URL}/wishlist/${productId}`,
     {},
@@ -78,6 +77,22 @@ function completeOrder(body) {
   );
   return promise;
 }
+function listWishlist() {
+  const authorization = getAuth();
+  const promise = axios.get(
+    `${process.env.REACT_APP_API_BASE_URL}/wishlist`,
+    authorization
+  );
+  return promise;
+}
+function removeFromWishlist(itemId){
+  const authorization = getAuth();
+  const promise = axios.delete(
+    `${process.env.REACT_APP_API_BASE_URL}/wishlist/${itemId}`,
+    authorization
+  );
+  return promise;
+}
 
 export {
   postSignUp,
@@ -88,4 +103,6 @@ export {
   removeItemFromCart,
   completeOrder,
   addToWishlist,
+  listWishlist,
+  removeFromWishlist
 };

@@ -10,6 +10,7 @@ import Login from "./Login";
 import PrivatePage from "./PrivatePage";
 import SignUp from "./SignUp";
 import UserAccount from "./UserAccount";
+import Wishlist from "./Whislist";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -24,6 +25,11 @@ function App() {
             <Route path="/sign-up" element={<SignUp />} />
             <Route path="/login" element={<Login />} />
             <Route path="/" element={<Home />} />
+            <Route path="/wishlist" element={
+            <PrivatePage>
+            <Wishlist />
+          </PrivatePage>} />
+            
             <Route
               path="/account"
               element={
