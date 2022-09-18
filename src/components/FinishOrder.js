@@ -19,6 +19,10 @@ export default function FinishOrder() {
     zipCode: 0,
     city: "",
     state: "",
+    cardNumber: "0000000000000000",
+    expirationDate: "01/01",
+    name: "",
+    securityCode: "000",
   });
 
   const navigate = useNavigate();
@@ -94,7 +98,7 @@ export default function FinishOrder() {
                 </div>
                 <Wrapper>
                   {cart.map((value) => (
-                    <div>
+                    <div key={value._id}>
                       <p>{value.name}</p>
                       <p>{value.price.toFixed(2)}</p>
                     </div>
@@ -163,6 +167,58 @@ export default function FinishOrder() {
                   placeholder="State"
                   name="state"
                   type="text"
+                  disabled={disabled}
+                  onChange={(e) =>
+                    handleForm({
+                      value: e.target.value,
+                      name: e.target.name,
+                    })
+                  }
+                  required
+                />
+                <input
+                  placeholder="Card Number"
+                  name="cardNumber"
+                  type="number"
+                  disabled={disabled}
+                  onChange={(e) =>
+                    handleForm({
+                      value: e.target.value,
+                      name: e.target.name,
+                    })
+                  }
+                  required
+                />
+                <input
+                  placeholder="Expiration Date"
+                  name="expirationDate"
+                  type="text"
+                  disabled={disabled}
+                  onChange={(e) =>
+                    handleForm({
+                      value: e.target.value,
+                      name: e.target.name,
+                    })
+                  }
+                  required
+                />
+                <input
+                  placeholder="Name"
+                  name="name"
+                  type="text"
+                  disabled={disabled}
+                  onChange={(e) =>
+                    handleForm({
+                      value: e.target.value,
+                      name: e.target.name,
+                    })
+                  }
+                  required
+                />
+                <input
+                  placeholder="Security Code"
+                  name="securityCode"
+                  type="number"
                   disabled={disabled}
                   onChange={(e) =>
                     handleForm({
