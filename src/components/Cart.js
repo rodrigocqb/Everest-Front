@@ -1,11 +1,13 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Main } from "../common/Main";
+import CartContext from "../contexts/CartContext";
 import { addToCart, getCart, removeItemFromCart } from "../services/everest";
 import Header from "./Header";
 
 export default function Cart() {
-  const [cart, setCart] = useState([]);
+  const { cart, setCart } = useContext(CartContext);
   const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
@@ -18,7 +20,7 @@ export default function Cart() {
         alert("There was an error when trying to load your cart");
         console.error(err);
       });
-  }, [refresh]);
+  }, [refresh, setCart]);
 
   let shipping = 0;
   let subtotal = 0;
@@ -99,7 +101,9 @@ export default function Cart() {
                 <p>{`Shipping fees: $${shipping.toFixed(2)}`}</p>
                 <p>{`Total: $${(shipping + subtotal).toFixed(2)}`}</p>
               </Price>
-              <BuyButton>Buy</BuyButton>
+              <Link to="/order">
+                <BuyButton>Buy</BuyButton>
+              </Link>
             </>
           )}
         </CartSection>
@@ -108,7 +112,7 @@ export default function Cart() {
   );
 }
 
-const CartSection = styled.section`
+export const CartSection = styled.section`
   margin-top: 80px;
   width: 45vw;
   height: 70vh;
