@@ -18,7 +18,7 @@ export default function ProductCards({ refresh, setRefresh }) {
         setProducts(res.data);
       })
       .catch((res) => console.log(res));
-  }, []);
+  }, [setProducts]);
 
   return (
     <>

@@ -58,7 +58,7 @@ function Card({ date, address, products, payment }) {
         <h3>State: {address.state}</h3>
         <h3>City: {address.city}</h3>
         <h3>
-          Street: {address.street},{address.number}
+          Street: {address.number} {address.street}
         </h3>
         <h3>Zip code: {address.zipCode}</h3>
       </div>
