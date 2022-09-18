@@ -4,9 +4,17 @@ import { Title } from "../common/Title";
 import { IoSearch, IoPersonCircle, IoCart, IoExit } from "react-icons/io5";
 import { useContext } from "react";
 import UserContext from "../contexts/UserContext";
+import CartContext from "../contexts/CartContext";
 
 export default function Header() {
   const { user } = useContext(UserContext);
+  const { cart } = useContext(CartContext);
+
+  let quantity = 0;
+  cart.forEach((value) => {
+    quantity += value.quantity;
+  });
+  console.log(quantity);
 
   return (
     <HeaderWrapper>
@@ -40,7 +48,10 @@ export default function Header() {
           </div>
         )}
         <Link to="/cart">
-          <IoCart />
+          <CartDiv>
+            <IoCart />
+            {quantity > 0 && <div>{quantity}</div>}
+          </CartDiv>
         </Link>
         {user ? (
           <IoExit
@@ -125,5 +136,25 @@ const UserDiv = styled.div`
 
   a {
     color: #22223b;
+  }
+`;
+
+const CartDiv = styled.div`
+  width: fit-content;
+  position: relative;
+  div {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #ff595e;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
   }
 `;
