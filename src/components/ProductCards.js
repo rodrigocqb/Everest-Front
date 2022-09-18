@@ -5,8 +5,7 @@ import { IoCart } from "react-icons/io5";
 import ProductModal from "./ProductModal";
 import { useNavigate } from "react-router-dom";
 
-
-export default function ProductCards() {
+export default function ProductCards({ refresh, setRefresh }) {
   const [products, setProducts] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
@@ -27,6 +26,8 @@ export default function ProductCards() {
           setShowModal={setShowModal}
           showModal={showModal}
           products={products}
+          refresh={refresh}
+          setRefresh={setRefresh}
         />
       ) : (
         <></>
@@ -43,6 +44,8 @@ export default function ProductCards() {
             units={product.units}
             productId={product._id}
             navigate={navigate}
+            refresh={refresh}
+            setRefresh={setRefresh}
           />
         ))}
       </CardsWrappler>
@@ -58,6 +61,8 @@ function Card({
   units,
   productId,
   navigate,
+  refresh,
+  setRefresh,
 }) {
   return (
     <CardWrappler
@@ -83,7 +88,10 @@ function Card({
           e.stopPropagation();
           if (units > 0) {
             addToCart(productId)
-              .then(() => console.log("added"))
+              .then(() => {
+                console.log("added");
+                setRefresh(!refresh);
+              })
               .catch(() => navigate("/login"));
           }
         }}

@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Main } from "../common/Main";
 import CartContext from "../contexts/CartContext";
 import { useLocal } from "../hooks/useLocal";
@@ -7,6 +7,8 @@ import Header from "./Header";
 import ProductCards from "./ProductCards";
 
 export default function Home() {
+  const [refresh, setRefresh] = useState(false);
+
   const { setCart } = useContext(CartContext);
 
   useLocal();
@@ -20,13 +22,13 @@ export default function Home() {
       .catch((err) => {
         console.error(err);
       });
-  }, [setCart]);
+  }, [setCart, refresh]);
 
   return (
     <>
       <Header />
       <Main>
-        <ProductCards />
+        <ProductCards refresh={refresh} setRefresh={setRefresh} />
       </Main>
     </>
   );
