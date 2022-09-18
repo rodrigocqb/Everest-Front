@@ -9,7 +9,7 @@ import { BiHeart, BiNotepad } from "react-icons/bi";
 export default function UserAccount() {
   const { user } = useContext(UserContext);
   const navigate = useNavigate();
-  
+
   return (
     <>
       <Header />
@@ -23,7 +23,7 @@ export default function UserAccount() {
               <p>{`Member since ${user.date}`}</p>
             </InfoWrapper>
             <Options>
-              <Link to="/orders">
+              <Link to="/order-history">
                 <div>
                   <BiNotepad />
                   <p>Your orders</p>
