@@ -10,8 +10,8 @@ import Login from "./Login";
 import PrivatePage from "./PrivatePage";
 import SignUp from "./SignUp";
 import UserAccount from "./UserAccount";
-import Wishlist from "./Whislist";
-import Orders from "./Orders";
+import Wishlist from "./Wishlist";
+import OrderHistory from "./OrderHistory";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -31,14 +31,18 @@ function App() {
               element={
                 <PrivatePage>
                   <Wishlist />
-                </PrivatePage>} />
+                </PrivatePage>
+              }
+            />
 
             <Route
-              path="/orders"
+              path="/order-history"
               element={
                 <PrivatePage>
-                  <Orders />
-                </PrivatePage>} />
+                  <OrderHistory />
+                </PrivatePage>
+              }
+            />
 
             <Route
               path="/account"
