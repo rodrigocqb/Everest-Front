@@ -94,6 +94,15 @@ function removeFromWishlist(itemId){
   return promise;
 }
 
+function listOrders() {
+  const authorization = getAuth();
+  const promise = axios.get(
+    `${process.env.REACT_APP_API_BASE_URL}/order`,
+    authorization
+  );
+  return promise;
+}
+
 export {
   postSignUp,
   postLogin,
@@ -104,5 +113,6 @@ export {
   completeOrder,
   addToWishlist,
   listWishlist,
-  removeFromWishlist
+  removeFromWishlist,
+  listOrders
 };
