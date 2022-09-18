@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Main } from "../common/Main";
 import UserContext from "../contexts/UserContext";
@@ -8,7 +8,8 @@ import { BiHeart, BiNotepad } from "react-icons/bi";
 
 export default function UserAccount() {
   const { user } = useContext(UserContext);
-
+  const navigate = useNavigate();
+  
   return (
     <>
       <Header />
@@ -29,7 +30,7 @@ export default function UserAccount() {
                 </div>
               </Link>
               <Link to="/wishlist">
-                <div>
+                <div onClick={() => navigate("/wishlist")}>
                   <BiHeart />
                   <p>Your wishlist</p>
                 </div>
