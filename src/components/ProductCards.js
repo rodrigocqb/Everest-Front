@@ -96,7 +96,7 @@ const CardsWrappler = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
-  gap: 5px;
+  gap: 10px;
   margin-top: 40px;
   flex-wrap: wrap;
 `;
