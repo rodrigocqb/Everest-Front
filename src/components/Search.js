@@ -3,14 +3,14 @@ import { useSearchParams } from "react-router-dom";
 import { Main } from "../common/Main";
 import CartContext from "../contexts/CartContext";
 import ProductsContext from "../contexts/ProductsContext";
-import { getCart } from "../services/everest";
+import { getCart, getProducts } from "../services/everest";
 import Header from "./Header";
 import ProductCards from "./ProductCards";
 
 export default function Search() {
   const [refresh, setRefresh] = useState(false);
 
-  const { products } = useContext(ProductsContext);
+  const { products, setProducts } = useContext(ProductsContext);
   const { setCart } = useContext(CartContext);
 
   const [searchParams] = useSearchParams();
@@ -24,7 +24,15 @@ export default function Search() {
       .catch((err) => {
         console.error(err);
       });
-  }, [setCart, refresh]);
+
+    if (products.length === 0) {
+      getProducts()
+        .then((res) => {
+          setProducts(res.data);
+        })
+        .catch((res) => console.log(res));
+    }
+  }, [setCart, refresh, setProducts, products.length]);
 
   const filteredProducts = products.filter((value) => {
     const queries = searchParams.get("q").split(" ");
