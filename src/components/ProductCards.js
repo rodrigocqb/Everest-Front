@@ -116,6 +116,7 @@ const CardWrappler = styled.div`
   img {
     width: 273px;
     height: 273px;
+    object-fit: cover;
     position: relative;
   }
   h1 {
