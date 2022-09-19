@@ -95,7 +95,7 @@ export default function Button({ type, productClicked, refresh, setRefresh }) {
 }
 
 const ButtonWrappler = styled.div`
-  margin-top: 80px;
+  margin-top: 60px;
   width: 100%;
 
   button {

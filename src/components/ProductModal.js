@@ -55,13 +55,17 @@ export default function ProductModal({
             </h2>
           </Details>
           <ButtonsWrappler>
-            <Button productClicked={productClicked} type="buy" />
-            <Button
-              productClicked={productClicked}
-              type="cart"
-              refresh={refresh}
-              setRefresh={setRefresh}
-            />
+            {productClicked.units > 0 && (
+              <>
+                <Button productClicked={productClicked} type="buy" />
+                <Button
+                  productClicked={productClicked}
+                  type="cart"
+                  refresh={refresh}
+                  setRefresh={setRefresh}
+                />
+              </>
+            )}
             <Button productClicked={productClicked} type="wishlist" />
           </ButtonsWrappler>
         </DetailsWrappler>
