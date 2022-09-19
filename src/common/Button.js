@@ -13,7 +13,17 @@ export default function Button({ type, productClicked, refresh, setRefresh }) {
     case "buy":
       return (
         <ButtonWrappler disabled={disabled}>
-          <button onClick={() => console.log("buy")}>
+          <button
+            onClick={() => {
+              console.log(productClicked);
+              setDisabled(true);
+              addToCart(productClicked._id)
+                .then(() => {
+                  navigate("/order");
+                })
+                .catch(() => navigate("/login"));
+            }}
+          >
             {disabled ? (
               <ThreeDots
                 height="13"
@@ -85,7 +95,7 @@ export default function Button({ type, productClicked, refresh, setRefresh }) {
 }
 
 const ButtonWrappler = styled.div`
-  margin-top: 80px;
+  margin-top: 60px;
   width: 100%;
 
   button {

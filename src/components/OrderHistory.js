@@ -25,7 +25,7 @@ export default function OrderHistory() {
             <Card
               key={item._id}
               address={item.address}
-              paymant={item.paymantData}
+              payment={item.paymentData}
               date={item.date}
               refresh={refresh}
               setRefresh={setRefresh}
@@ -42,28 +42,31 @@ export default function OrderHistory() {
   );
 }
 
-function Card({ date, address, products }) {
+function Card({ date, address, products, payment }) {
   console.log(address.street);
+  let total = 0;
+  products.forEach((value) => {
+    total += value.price * value.quantity + value.shipping;
+  });
   return (
     <CardWrappler>
-      <h2>{date}</h2>
+      <section>
+        <h2>{date}</h2>
+      </section>
       <div>
-        <h2>Adress:</h2>
+        <h2>Address:</h2>
         <h3>State: {address.state}</h3>
         <h3>City: {address.city}</h3>
         <h3>
-          Street: {address.street},{address.number}
+          Street: {address.number} {address.street}
         </h3>
         <h3>Zip code: {address.zipCode}</h3>
       </div>
       <div>
-        <h2>Paymant:</h2>
-        <h3>State: {address.state}</h3>
-        <h3>City: {address.city}</h3>
-        <h3>
-          Street: {address.street},{address.number}
-        </h3>
-        <h3>Zip code: {address.zipCode}</h3>
+        <h2>Payment:</h2>
+        <h3>Card ending in: {payment.cardNumber.slice(-4)}</h3>
+        <h3>Name: {payment.name}</h3>
+        <h3>Total: ${total.toFixed(2)}</h3>
       </div>
       <div>
         <h2>Products:</h2>
@@ -84,7 +87,7 @@ function Card({ date, address, products }) {
 function ProductInfo({ image, name, price, quantity, shipping }) {
   return (
     <ProductsWrappler>
-      <img src={image} />
+      <img src={image} alt="" />
       <div>
         <h3>{name}</h3>
         <h3>Price: ${Number(price).toFixed(2)}</h3>
@@ -156,11 +159,20 @@ const CardWrappler = styled.div`
   border: 2px solid white;
   > div {
     min-height: 100px;
-    border: 1px dotted white;
+    border: 1px solid white;
     padding: 20px;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+  }
+  section {
+    display: flex;
+    align-items: center;
+    height: 48px;
+    padding-left: 20px;
+    h2 {
+      margin-bottom: 0px;
+    }
   }
 `;
 const Close = styled.div`

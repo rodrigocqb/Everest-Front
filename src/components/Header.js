@@ -1,20 +1,29 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Title } from "../common/Title";
 import { IoSearch, IoPersonCircle, IoCart, IoExit } from "react-icons/io5";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import UserContext from "../contexts/UserContext";
 import CartContext from "../contexts/CartContext";
 
 export default function Header() {
   const { user } = useContext(UserContext);
   const { cart } = useContext(CartContext);
+  const [search, setSearch] = useState("");
 
   let quantity = 0;
   cart.forEach((value) => {
     quantity += value.quantity;
   });
-  console.log(quantity);
+
+  const navigate = useNavigate();
+
+  function executeSearch() {
+    if (search !== "") {
+      const query = search.replaceAll(" ", "+").toLowerCase();
+      navigate(`/search?q=${query}`);
+    }
+  }
 
   return (
     <HeaderWrapper>
@@ -26,8 +35,9 @@ export default function Header() {
           name="searchbar"
           type="text"
           placeholder="What are you searching for?"
+          onChange={(e) => setSearch(e.target.value)}
         />
-        <IoSearch />
+        <IoSearch onClick={executeSearch} />
       </Searchbar>
       <UserDiv>
         <div>

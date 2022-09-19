@@ -1,8 +1,9 @@
 import { useContext, useEffect, useState } from "react";
 import { Main } from "../common/Main";
 import CartContext from "../contexts/CartContext";
+import ProductsContext from "../contexts/ProductsContext";
 import { useLocal } from "../hooks/useLocal";
-import { getCart } from "../services/everest";
+import { getCart, getProducts } from "../services/everest";
 import Header from "./Header";
 import ProductCards from "./ProductCards";
 
@@ -10,6 +11,7 @@ export default function Home() {
   const [refresh, setRefresh] = useState(false);
 
   const { setCart } = useContext(CartContext);
+  const { products, setProducts } = useContext(ProductsContext);
 
   useLocal();
 
@@ -22,13 +24,23 @@ export default function Home() {
       .catch((err) => {
         console.error(err);
       });
-  }, [setCart, refresh]);
+
+    getProducts()
+      .then((res) => {
+        setProducts(res.data);
+      })
+      .catch((res) => console.log(res));
+  }, [setCart, refresh, setProducts]);
 
   return (
     <>
       <Header />
       <Main>
-        <ProductCards refresh={refresh} setRefresh={setRefresh} />
+        <ProductCards
+          refresh={refresh}
+          products={products}
+          setRefresh={setRefresh}
+        />
       </Main>
     </>
   );

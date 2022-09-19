@@ -1,23 +1,13 @@
 import styled from "styled-components";
-import { getProducts, addToCart } from "../services/everest";
-import { useEffect, useState } from "react";
+import { addToCart } from "../services/everest";
+import { useState } from "react";
 import { IoCart } from "react-icons/io5";
 import ProductModal from "./ProductModal";
 import { useNavigate } from "react-router-dom";
 
-export default function ProductCards({ refresh, setRefresh }) {
-  const [products, setProducts] = useState([]);
+export default function ProductCards({ refresh, setRefresh, products }) {
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const promise = getProducts();
-    promise
-      .then((res) => {
-        setProducts(res.data);
-      })
-      .catch((res) => console.log(res));
-  }, []);
 
   return (
     <>
@@ -106,7 +96,7 @@ const CardsWrappler = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
-  gap: 5px;
+  gap: 10px;
   margin-top: 40px;
   flex-wrap: wrap;
 `;
