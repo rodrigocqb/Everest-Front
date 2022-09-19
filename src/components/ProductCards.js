@@ -1,24 +1,13 @@
 import styled from "styled-components";
-import { getProducts, addToCart } from "../services/everest";
-import { useContext, useEffect, useState } from "react";
+import { addToCart } from "../services/everest";
+import { useState } from "react";
 import { IoCart } from "react-icons/io5";
 import ProductModal from "./ProductModal";
 import { useNavigate } from "react-router-dom";
-import ProductsContext from "../contexts/ProductsContext";
 
-export default function ProductCards({ refresh, setRefresh }) {
-  const { products, setProducts } = useContext(ProductsContext);
+export default function ProductCards({ refresh, setRefresh, products }) {
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const promise = getProducts();
-    promise
-      .then((res) => {
-        setProducts(res.data);
-      })
-      .catch((res) => console.log(res));
-  }, [setProducts]);
 
   return (
     <>

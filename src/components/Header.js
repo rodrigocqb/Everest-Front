@@ -20,7 +20,7 @@ export default function Header() {
 
   function executeSearch() {
     if (search !== "") {
-      const query = search.replaceAll(" ", "+");
+      const query = search.replaceAll(" ", "+").toLowerCase();
       navigate(`/search?q=${query}`);
     }
   }
