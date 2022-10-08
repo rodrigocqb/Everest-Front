@@ -40,7 +40,7 @@ The following tools and frameworks were used in the construction of the front en
 ## How to run
 1. Create a root project folder called Everest
 ```bash
-mkdir MyWallet
+mkdir Everest
 ```
 2. Clone this repository
 3. Create .env file based on .env.example file
