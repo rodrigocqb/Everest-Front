@@ -123,6 +123,7 @@ const Modal = styled.div`
   background-color: #f2e9e4;
   img {
     width: 500px;
+    object-fit: cover;
   }
 `;
 const CloseButton = styled.div`
