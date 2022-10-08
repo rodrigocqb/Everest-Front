@@ -1,70 +1,61 @@
-# Getting Started with Create React App
+# Everest
+Everest, the pinnacle of online shopping, is an e-commerce project, a store where you can buy anything (anything that's legal, of course).
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+https://user-images.githubusercontent.com/106849571/194723265-7801957a-917d-4231-bae9-b46ac222cd52.mp4
 
-## Available Scripts
+[14 - Everest part 2.webm](https://user-images.githubusercontent.com/106849571/194723274-3451b570-37a9-4a6a-81be-64ecacb16aad.webm)
 
-In the project directory, you can run:
+You can try it at http://everest-front.vercel.app/
 
-### `npm start`
+## About
+This application is an e-commerce website where people can buy their favorite products or add them to wishlists so they can buy them later. Below are the features for the front end part of this project:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Sign Up
+- Login
+- Logout
+- List all products and their availability
+- Page for each product with their description
+- Add a product to cart
+- Show user's cart and how many items are on it
+- Increase/Decrease amount of the same item on the cart
+- Complete order after reviewing cart
+- Confirmation after a successful order
+- Add product to wishlist
+- Show user's wishlist
+- User page with their personal information
+- List past orders for each user
+- Searchbar
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Technologies
+The following tools and frameworks were used in the construction of the front end of this project:
+<p>
+  <img style='margin: 5px;' src="https://img.shields.io/badge/react-app%20-%2320232a.svg?&style=for-the-badge&color=60ddf9&logo=react&logoColor=%2361DAFB"/>
+  <img style='margin: 5px;' src='https://img.shields.io/badge/styled-components%20-%2320232a.svg?&style=for-the-badge&color=b8679e&logo=styled-components&logoColor=%3a3a3a'>
+  <img style='margin: 5px;' src='https://img.shields.io/badge/React_Router-20232A?style=for-the-badge&logo=react-router&logoColor=white'>
+  <img style='margin: 5px;' src='https://img.shields.io/badge/axios%20-%2320232a.svg?&style=for-the-badge&color=informational'>
+  <img style='margin: 5px;' src='https://img.shields.io/badge/react-icons-%23563D7C.svg?style=for-the-badge&logo=react&logoColor=60ddf9'>
+</p>
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## How to run
+1. Create a root project folder called Everest
+```bash
+mkdir MyWallet
+```
+2. Clone this repository
+3. Create .env file based on .env.example file
+4. You can either run the back end locally or use the deploy link for your .env file: https://everest-back.herokuapp.com/
+5. Clone the back end repository at https://github.com/rodrigocqb/Everest-Back
+6. Follow the instructions to run the back end at https://github.com/rodrigocqb/Everest-Back
+7. Install dependencies
+```bash
+npm i
+```
+8. Run the project
+```bash
+npm start
+```
+9. You can optionally build the project with
+```bash
+npm run build
+```
+10. Finally access http://localhost:3000 on any browser
