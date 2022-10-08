@@ -25,6 +25,7 @@ This application is an e-commerce website where people can buy their favorite pr
 - User page with their personal information
 - List past orders for each user
 - Searchbar
+- Persistent login
 
 ## Technologies
 The following tools and frameworks were used in the construction of the front end of this project:
